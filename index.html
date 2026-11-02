@@ -46,6 +46,7 @@ footer{text-align:center;padding:1.4rem;font-size:.85rem;color:var(--suave);bord
 
 <main>
   <h1>Anuel AA: El Dios del Trap</h1>
+  <div id="saludo" class="caja"></div>
   <p>Emmanuel Gazmey Santiago, conocido artísticamente como <strong>Anuel AA</strong>, es un rapero y cantante puertorriqueño nacido en Carolina, Puerto Rico, el 26 de noviembre de 1992. Es una de las figuras más reconocidas del trap latino y el reguetón.</p>
 
   <div class="galeria">
@@ -73,5 +74,38 @@ footer{text-align:center;padding:1.4rem;font-size:.85rem;color:var(--suave);bord
 </main>
 
 <footer>Página web básica · Trabajo de Redes · Universidad Pontificia Bolivariana</footer>
+<script>
+// Punto 4: pregunta nombre y fecha de nacimiento, e imprime nombre y edad
+(function () {
+  var salida = document.getElementById("saludo");
+  var nombre = prompt("¿Cuál es su nombre?");
+  var fechaTexto = prompt("¿Cuál es su fecha de nacimiento? (formato AAAA-MM-DD)");
+
+  if (!nombre || !fechaTexto) {
+    salida.textContent = "No se ingresaron todos los datos.";
+    return;
+  }
+
+  var nacimiento = new Date(fechaTexto + "T00:00:00");
+  if (isNaN(nacimiento.getTime())) {
+    salida.textContent = "La fecha no es válida. Use el formato AAAA-MM-DD.";
+    return;
+  }
+
+  var hoy = new Date();
+  var edad = hoy.getFullYear() - nacimiento.getFullYear();
+  var meses = hoy.getMonth() - nacimiento.getMonth();
+  if (meses < 0 || (meses === 0 && hoy.getDate() < nacimiento.getDate())) {
+    edad--;
+  }
+
+  if (edad < 0) {
+    salida.textContent = "La fecha de nacimiento no puede ser futura.";
+    return;
+  }
+
+  salida.textContent = "Nombre: " + nombre + " | Edad: " + edad + " años";
+})();
+</script>
 </body>
 </html>
